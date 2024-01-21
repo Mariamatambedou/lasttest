@@ -18,8 +18,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Construire votre application Angular
-                sh 'ng build --prod'
+                script {
+                    sh 'npm install'
+                    sh 'ng build --prod'
+                }
             }
         }
 
