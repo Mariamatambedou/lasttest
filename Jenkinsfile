@@ -19,6 +19,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                  sh 'npm cache clean --force'
                     sh 'npm install'
                     sh 'ng build --prod'
                 }
