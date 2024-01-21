@@ -15,6 +15,15 @@ pipeline {
             }
         }
 
+      stage('Install Angular CLI') {
+    steps {
+        script {
+            sh 'npm install -g @angular/cli'
+        }
+    }
+}
+
+
         stage('Build') {
             steps {
                 // Construire votre application Angular
