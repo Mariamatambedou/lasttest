@@ -6,6 +6,7 @@ pipeline {
         AWS_BUCKET_NAME = 'myjenkinsbuk'
         AWS_CREDENTIALS_ID = 'myjenkinsbuk'
         ANGULAR_DIST_FOLDER = 'dist'
+        NPM_CACHE = '/var/lib/jenkins/.npm'
     }
 
     stages {
@@ -15,14 +16,17 @@ pipeline {
             }
         }
 
-      stage('Install Angular CLI') {
-    steps {
-        script {
-            sh 'npm install -g @angular/cli'
-        }
-    }
-}
+        stage('Install Angular CLI') {
+            steps {
+                script {
+                    // Créer le répertoire du cache npm s'il n'existe pas
+                    sh "mkdir -p ${NPM_CACHE}"
 
+                    // Installer Angular CLI avec npm et spécifier le répertoire du cache
+                    sh "npm install -g --cache=${NPM_CACHE} @angular/cli"
+                }
+            }
+        }
 
         stage('Build') {
             steps {
