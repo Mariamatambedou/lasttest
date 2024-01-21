@@ -19,8 +19,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                  sh 'npm cache clean --force'
-                    sh 'npm install'
+                  sh 'npm install -g @angular/cli@latest'
+sh 'rm -rf node_modules package-lock.json'
+sh 'npm install'
+
                     sh 'ng build --prod'
                 }
             }
